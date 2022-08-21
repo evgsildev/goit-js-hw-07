@@ -8,6 +8,7 @@ const cardsMarkup = createGallery(galleryItems);
 
 galleryContainer.insertAdjacentHTML("beforeend", cardsMarkup);
 
+galleryContainer.addEventListener("click", onGalleryContainerClick);
 
 
 function createGallery(galleryItems) {
@@ -18,7 +19,7 @@ function createGallery(galleryItems) {
                 <img
                     class="gallery__image"
                     src="${preview}"
-                    data-source="large-image.jpg"
+                    data-source="${original}"
                     alt="${description}"
                 />
             </a>
@@ -28,3 +29,10 @@ function createGallery(galleryItems) {
    
 }
 
+function onGalleryContainerClick (evt) {
+   
+    evt.preventDefault();
+    const imgBlock = evt.target;
+    const linkUrl = imgBlock.parentNode.href;
+    console.log(linkUrl); 
+}
