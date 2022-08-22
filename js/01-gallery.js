@@ -38,18 +38,18 @@ function onGalleryContainerClick (evt) {
 
     evt.preventDefault();
 
-    const getImg = evt.target;
+    const getCurrentImg = evt.target;
     
-    getImg.setAttribute("src", getImg.dataset.source);
+    const getNewUrl = getCurrentImg.dataset.source;
+
     
-    const imgSrc = getImg.src;
 
     const instance = basicLightbox.create(`
-    <img src="${imgSrc}" width="800" height="600">
+        <img src="${getNewUrl}">
     `)
 
     instance.show();
-    
+
     document.addEventListener("keydown", evt => {
         if(evt.key == "Escape") {
             return instance.close();
