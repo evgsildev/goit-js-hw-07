@@ -1,4 +1,5 @@
 import { galleryItems } from './gallery-items.js';
+
 // Change code below this line
 
 console.log(galleryItems);
@@ -30,9 +31,28 @@ function createGallery(galleryItems) {
 }
 
 function onGalleryContainerClick (evt) {
-   
+    const isPictureEl = evt.target.classList.contains("gallery__image");
+    if(!isPictureEl) {
+        return;
+    }
+
     evt.preventDefault();
-    const imgBlock = evt.target;
-    const linkUrl = imgBlock.parentNode.href;
-    console.log(linkUrl); 
+
+    const getImg = evt.target;
+    
+    getImg.setAttribute("src", getImg.dataset.source);
+    
+    const imgSrc = getImg.src;
+
+    const instance = basicLightbox.create(`
+    <img src="${imgSrc}" width="800" height="600">
+    `)
+
+    instance.show();
+    
+    document.addEventListener("keydown", evt => {
+        if(evt.key == "Escape") {
+            return instance.close();
+    }
+});
 }
